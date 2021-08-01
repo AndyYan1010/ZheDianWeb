@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">柘电</string>
+
+    <string name="jws_Infrared_true">True</string>
+    <string name="jws_Infrared_false">False</string>
+
+    <string name="error_gif">False</string>
+</resources>
