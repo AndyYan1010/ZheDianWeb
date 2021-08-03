@@ -195,15 +195,40 @@ public class MainWebViewActivity extends AppCompatActivity {
     }
 
     /***跳转人脸认证*/
+    @SuppressLint("CheckResult")
     private void step2CheckFace() {
-        Intent intent = new Intent(this, CameraPhotoActivity.class);
-        intent.putExtra("ftype", 5);
-        intent.putExtra("webJSType", webJSType);
-        intent.putExtra("webType", webType);
-        intent.putExtra("customerID", mCustomerID);
-        intent.putExtra("device", mDevice);
-        intent.putExtra("orderID", mOrderID);
-        startActivityForResult(intent, REQUEST_CODE_GET_FACE);
+        new RxPermissions(this)
+                .request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+                .subscribe(granted -> {
+                    if (granted) {
+                        Intent intent = new Intent(this, CameraPhotoActivity.class);
+                        intent.putExtra("ftype", 5);
+                        intent.putExtra("webJSType", webJSType);
+                        intent.putExtra("webType", webType);
+                        intent.putExtra("customerID", mCustomerID);
+                        intent.putExtra("device", mDevice);
+                        intent.putExtra("orderID", mOrderID);
+                        startActivityForResult(intent, REQUEST_CODE_GET_FACE);
+                    } else {
+                        //未开启定位权限或者被拒绝的操作
+                        ToastDialogUtil.getInstance()
+                                .setContext(this)
+                                .useStyleType(NORMOL_STYLE)
+                                .setTitle("无法获取设备读取权限")
+                                .setCont("您好，设备需使用相关权限，才能保证软件的正常运行。")
+                                .showCancelView(true, "取消", (dialogUtil, view) -> dialogUtil.dismiss())
+                                .showSureView(true, "去设置", (dialogUtil, view) -> {
+                                    //跳转设置界面
+                                    Intent intent = new Intent();
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                    intent.setData(Uri.fromParts("package", getPackageName(), null));
+                                    startActivity(intent);
+                                    finish();
+                                })
+                                .show();
+                    }
+                });
     }
 
     @SuppressLint({"CheckResult", "MissingPermission"})
