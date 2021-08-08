@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.botian.zhedian">
     <!--    android:sharedUserId="android.uid.system"-->
-    
+
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- 这个权限用于进行网络定位-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -70,15 +70,9 @@
             </intent-filter>
         </activity>
 
-
-        <!--                <activity-->
-        <!--                    android:name=".MainWebViewActivity"-->
-        <!--                    android:theme="@style/Theme.AppCompat.Light.NoActionBar">-->
-        <!--                    <intent-filter>-->
-        <!--                        <action android:name="android.intent.action.MAIN" />-->
-        <!--                        <category android:name="android.intent.category.LAUNCHER" />-->
-        <!--                    </intent-filter>-->
-        <!--                </activity>-->
+        <activity
+            android:name=".activity.PDFFileActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity
             android:name="com.botian.zhedian.activity.CameraPhotoActivity"
@@ -99,7 +93,7 @@
             android:name="com.botian.zhedian.activity.DeviceActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
-        
+
 
         <!--其他的配置项-->
         <provider
@@ -111,7 +105,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-        
+
     </application>
 
 </manifest>

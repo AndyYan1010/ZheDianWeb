@@ -99,4 +99,6 @@ dependencies {
 
     //知乎：手机图片视频选择器
     implementation 'com.zhihu.android:matisse:0.5.2-beta3'
+
+    implementation 'com.github.barteksc:android-pdf-viewer:3.2.0-beta.1'
 }

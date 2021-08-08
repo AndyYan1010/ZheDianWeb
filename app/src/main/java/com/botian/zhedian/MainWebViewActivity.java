@@ -19,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.botian.zhedian.activity.CameraPhotoActivity;
+import com.botian.zhedian.activity.PDFFileActivity;
 import com.botian.zhedian.utils.PhoneInfoUtil;
 import com.botian.zhedian.utils.ToastDialogUtil;
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -36,6 +37,7 @@ public class MainWebViewActivity extends AppCompatActivity {
     WebView   web_url;
     @BindView(R.id.img_logo)
     ImageView img_logo;
+
 
     private Unbinder unBinder;
     private int      REQUEST_CODE_GET_FACE = 10001;
@@ -67,6 +69,9 @@ public class MainWebViewActivity extends AppCompatActivity {
         initWebView();
         //获取硬件信息
         getDevInfo();
+        Intent intent = new Intent(MainWebViewActivity.this, PDFFileActivity.class);
+        intent.putExtra("pdfUrl", "pdfUrl");
+        startActivity(intent);
     }
 
     protected void initListener() {
@@ -181,6 +186,13 @@ public class MainWebViewActivity extends AppCompatActivity {
                 mOrderID  = orderID;
                 //跳转人脸认证
                 step2CheckFace();
+            }
+
+            @JavascriptInterface
+            public void showPDFFile(String pdfUrl) {
+                Intent intent = new Intent(MainWebViewActivity.this, PDFFileActivity.class);
+                intent.putExtra("pdfUrl", pdfUrl);
+                startActivity(intent);
             }
         }, "shangyukeji");
     }
