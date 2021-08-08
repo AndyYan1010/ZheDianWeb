@@ -69,9 +69,9 @@ public class MainWebViewActivity extends AppCompatActivity {
         initWebView();
         //获取硬件信息
         getDevInfo();
-        Intent intent = new Intent(MainWebViewActivity.this, PDFFileActivity.class);
-        intent.putExtra("pdfUrl", "pdfUrl");
-        startActivity(intent);
+        //Intent intent = new Intent(MainWebViewActivity.this, PDFFileActivity.class);
+        //intent.putExtra("pdfUrl", "pdfUrl");
+        //startActivity(intent);
     }
 
     protected void initListener() {
